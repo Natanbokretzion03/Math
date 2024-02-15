@@ -1,0 +1,41 @@
+public class Main {
+    public static void main(String[] args) {
+        int n = 5;
+        int sides = 6; 
+        int count = 0;
+
+  
+        int[] rolls = new int[n];
+        rollDice(n, sides, rolls, 0, count);
+
+        double totalOutcomes = Math.pow(sides, n);
+
+      
+        double probability = count / totalOutcomes;
+
+ 
+        System.out.println("Probability that the average exceeds 4: " + probability);
+    }
+
+    
+    public static void rollDice(int n, int sides, int[] rolls, int index, int count) {
+        if (index == n) {
+    
+            double sum = 0;
+            for (int roll : rolls) {
+                sum += roll;
+            }
+            double average = sum / n;
+          
+            if (average > 4) {
+                count++;
+            }
+        } else {
+    
+            for (int i = 1; i <= sides; i++) {
+                rolls[index] = i;
+                rollDice(n, sides, rolls, index + 1, count);
+            }
+        }
+    }
+}
